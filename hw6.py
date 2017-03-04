@@ -14,7 +14,7 @@ def hashit(filestring,filestring2,animal,A,B,saltA,saltB):
 	filestring3 = filestring+salt			#concatenate
 	m.update(filestring3)
 	has = m.hexdigest()
-	has = has[0:1]					#get first 10 hex digits of hasi
+	has = has[0:3]					#get first 10 hex digits of hasi
 
 
 	if(animal == "cat"):				#check if cat or dog file and see if there's a match
@@ -24,42 +24,12 @@ def hashit(filestring,filestring2,animal,A,B,saltA,saltB):
 			saltA.append(salt)
 			loop = 0
 		else:
-			print "CAT"
-			print "the matching hash value is ",list(check)			
-
-			index = match(check,A)
-
-			print "A is ",A
-			print "index is ",index
-			print "matching index is ",A[index]
-			print "length of saltA is ",len(saltA)
-		
-
-#			f2 = f+saltA[index]				
-#			m.update(f2)
-#			has = m.hexdigest()
-#			print "THE MATCHING HEX DIGITS IS ",has[0:1]
-	
-			fh = open("UC.jpg","wb")
-			fh.write(f.decode('base64'))
-			fh.close()
-
-
-			print "B is ",B	
-			index = match(check,B)
-			print "index is ",index
-			print "matching index in B ",B[index]
-
-			filestring2 = filestring2+saltB[index]
-			m.update(filestring2)
-			has = m.hexdigest()
-			print "THE MATCHING HEX DIGITS IS ",has[0:1]	
-
-
-			fh = open("UD.jpg","wb")
-			fh.write(filestring2.decode('base64'))
-			fh.close()
-
+			value = list(check)
+			print "the collision is ",value[0]		
+			print "\n"
+			print "Cat list is ",A
+			print "\n"
+			print "Dog list is ",B
 			loop = 1
 
 	else:
@@ -69,38 +39,12 @@ def hashit(filestring,filestring2,animal,A,B,saltA,saltB):
 			saltB.append(salt)
 			loop = 0
 		else:
-			
-			print "DOG"
-			index = match(check,B)
-			print "B is ",B
-			print "the index is ",index
-			print "matching index is ",B[index]	
-			f = f+saltB[index]				
-			print "SALT IF INDEX IS ",saltB[index]
-			print "ACTUAL SALT IS ",salt
-			m.update(f)
-			has = m.hexdigest()
-			print "THE MATCHING HEX DIGITS IS ",has[0:1]
-	
-
-			fh = open("UD.jpg","wb")
-			fh.write(f.decode('base64'))
-			fh.close()
-	
-			print "A is ",A
-			index = match(check,A)
-			print "the index is ",index
-			print "matching index is ",A[index]
-			
-			filestring2 = filestring2+saltA[index]
-			m.update(filestring2)
-			has = m.hexdigest()
-			print "THE MATCHING HEX DIGITS IS ",has[0:1]
-
-			fh = open("UC.jpg","wb")
-			fh.write(filestring2.decode('base64'))
-			fh.close()
-
+			value = list(check)
+			print "the collision is ",value[0]		
+			print "\n"
+			print "Cat list is ",A
+			print "\n"
+			print "Dog list is ",B
 			loop = 1
 
 	return	(loop,A,B,saltA,saltB)
@@ -157,13 +101,5 @@ def main():
 			animal = "cat"
 			loop,A,B,saltA,saltB = hashit(filestring,filestring2,animal,A,B,saltA,saltB)
 
-
-	m = hashlib.md5()
-	
-	for x in range(0,len(saltA)):
-			f2 = filestring+saltA[x]				
-			m.update(f2)
-			has = m.hexdigest()
-			print "THE MATCHING HEX DIGITS IS ",has
 
 main()
